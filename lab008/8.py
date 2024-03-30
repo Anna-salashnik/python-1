@@ -1,38 +1,49 @@
 import random
-print("добро пожаловать в игру камень ножницы бумага!")
-playerScore=0
-botScore=0
+
+print("Добро пожаловать в игру 'Камень, Ножницы, Бумага, Ящерица, Спок'!")
+playerScore = 0
+botScore = 0
+
+rules = {
+    "к": ["н", "я", "б", "С"],
+    "н": ["б", "я", "С", "к"],
+    "б": ["к", "С", "н", "я"],
+    "я": ["б", "к", "н", "С"],
+    "С": ["н", "б", "я", "к"]
+}
+
 for i in range(3):
- answer = input("Что выберешь?\n").lower()
- if answer.find("камень") != -1:
- answer = "к"
- elif answer.find("ножницы") != -1:
- answer = "н"
- elif answer.find("бумага") != -1 or answer.find("бумагу") != -1:
- answer = "б"
- elif answer.find("ящерица") != -1 or answer.find("ящерицу") != -1:
- answer = "я"
- elif answer.find("спок") != -1:
- answer = "с"
- botAnswer = random.choice(["камень", "ножницы", "бумагу", "ящерицу", "спок"])
- print(f"А я выберу {botAnswer}")
- botAnswer = botAnswer[0]
- print(botAnswer)
- if answer == botAnswer:
- print("ничья!")
- elif (answer == "к" and botAnswer == "н") or\
- (answer == "н" and botAnswer == "б") or \
- (answer == "б" and botAnswer == "к"
-  answer == "я" and botAnswer == "к"
-   answer == "я" and botAnswer == "к"
-    answer == "я" and botAnswer == "к"):
- print("ты победил!")
- playerScore+=1
- else:
- print("я победил!")
- botScore+=1
+    answer = input("Что выберешь?\n").lower()
+  
+    if answer in {"камень", "камень", "к"}:
+        answer = "к"
+    elif answer in {"ножницы", "ножницы", "н"}:
+        answer = "н"
+    elif answer in {"бумагу", "бумага", "б"}:
+        answer = "б"
+    elif answer in {"ящерица", "ящерицу", "я"}:
+        answer = "я"
+    elif answer in {"с", "спок"}:
+        answer = "С"
+    else:
+        print("Такого варианта нет, выберите среди 'камень', 'ножницы', 'бумага', 'ящерица' или 'Спок'")
+        continue
+  
+    botAnswer = random.choice(list(rules.keys()))
+    print(f"А я выберу {botAnswer}")
+
+    if answer == botAnswer:
+        print("Ничья!")
+    elif botAnswer in rules[answer]:
+        print("Ты победил!")
+        playerScore += 1
+    else:
+        print("Я победил!")
+        botScore += 1
+
 if playerScore == botScore:
- print("ничья по итогам трёх раундов!")
+    print("Ничья по итогам трех раундов!")
 elif playerScore > botScore:
- print("ты победил по итогам трёх раундов")
-else: print("я победил по итогам трёх раундов")
+    print("Ты победил по итогам трех раундов!")
+else:
+    print("Я победил по итогам трех раундов!")
